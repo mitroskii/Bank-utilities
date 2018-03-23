@@ -1,32 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
-namespace Bban
+namespace BankApp
 {
     class Customer
     {
-        //Fields
-        public string FirstName;
-        public string LastName;
-        public double AccountNumber;
+        
+        private string _firstName;
+        private string _lastName;
+        private string _accountNumber;
 
-        //Constructor
-        public Customer()
+        
+        public Customer(string firstName, string lastName, string accountNumber)
         {
-            FirstName = "unknown";
-            LastName = "unknown";
-            AccountNumber = 0;
+            _firstName = firstName;
+            _lastName = lastName;
+            _accountNumber = accountNumber;
         }
 
-        public Customer(string firstname, string lastname, double accountnumber)
+        public string AccountNumber
         {
-            FirstName = firstname;
-            LastName = lastname;
-            this.AccountNumber = accountnumber;
+            get { return _accountNumber; }
+            set { _accountNumber = value; }
         }
 
-        //Methods
-
+        public override string ToString()
+        {
+            return $"{_firstName}{_lastName}\t{_accountNumber}";
+        }
     }
 }

@@ -1,28 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
-namespace Bban
+namespace BankApp
 {
     class Bank
     {
-        //Fields
-        public string Name;
-        public double AccountNumber;
+        
+        private string _name;
+        private List<Account> _accounts;
 
-        //Constructor
-        public Bank()
+        
+        public Bank(string name)
         {
-            Name = "unknown";
-            AccountNumber = 0;
+            _name = name;
+            _accounts = new List<Account>();
         }
 
-        public Bank(string name, double accountnumber)
+        public Bank(List<Account> accounts, string name)
         {
-            Name = name;
-            this.AccountNumber = accountnumber;
+            _accounts = accounts;
+            _name = name;
         }
 
-        //Methods
+        
+        public string CreateAccount()
+        {
+            Random rnd = new Random();
+            string rndAccount = "FI";
+            for (int i = 0; i < 16; i++)
+            {
+                rndAccount += rnd.Next(0, 10);
+            }
+            _accounts.Add(new Account(rndAccount));
+            return rndAccount;
+        }
+        
+        public bool AddTransactionForCustomer(string accountNumber, Transaction transaction)
+        {
+            return (from account in _accounts
+                where account.AccountNumber == accountNumber
+                select account).First().AddTransaction(transaction);
+        }
+
+        public double GetBalanceForCustomer(string accountNumber)
+        {
+            return (from account in _accounts
+                    where account.AccountNumber == accountNumber
+                    select account).FirstOrDefault().Balance;
+        }
     }
 }
