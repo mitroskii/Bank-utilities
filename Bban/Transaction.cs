@@ -9,15 +9,16 @@ namespace BankApp
     {
 
         public double Sum; 
-        private DateTime _timestamp;
+        private DateTime _timeStamp;
 
         
         public Transaction(double sum, DateTime timestamp)
         {
             Sum = sum;
-            _timestamp = timestamp;
+            _timeStamp = timestamp;
         }
 
         public double sum { get => Sum; set => Sum = value; }
+        public DateTime TimeStamp { get => _timeStamp; set => _timeStamp = value; }
     }
 }
