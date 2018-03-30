@@ -8,18 +8,18 @@ namespace BankApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("BankApp v1.0");
-            Bank bank = new Bank("Ankkalinnan pankki");
+            Console.WriteLine("BankApp");
+            Bank bank = new Bank("Center Bank");
             List<Customer> customers = new List<Customer>();
-            customers.Add(new Customer("Aku", "Ankka", bank.CreateAccount()));
-            customers.Add(new Customer("Roope", "Ankka", bank.CreateAccount()));
-            customers.Add(new Customer("Hannu", "Hanhi", bank.CreateAccount()));
+            customers.Add(new Customer("Donald", "Duck", bank.CreateAccount()));
+            customers.Add(new Customer("Scrooge", "McDuck", bank.CreateAccount()));
+            customers.Add(new Customer("Gyro", "Gearloose", bank.CreateAccount()));
             var endTime = DateTime.Today;
             var time = new TimeSpan(24 * 30 * 12, 0, 0);
             var startTime = endTime.Date - time;
-            Console.WriteLine($"Tilitapahtumat viimeisen vuoden ajalta:{startTime.ToShortDateString()}" + $"-{endTime.ToShortDateString()}");
+            Console.WriteLine($"Transactions from last year:{startTime.ToShortDateString()}" + $"-{endTime.ToShortDateString()}");
             Random rnd = new Random();
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 500; i++)
             {
                 bank.AddTransactionForCustomer(customers[rnd.Next(0, 3)].AccountNumber, new Transaction(rnd.Next(-50000, 50000),
                     new DateTime(rnd.Next(2016, 2019), rnd.Next(1, 13), rnd.Next(1, 29))));
@@ -29,7 +29,7 @@ namespace BankApp
                 PrintBalance(bank, customers[i]);
                 PrintTransaction(bank.GetTransactionsForCustomerForTimeSpan(customers[i].AccountNumber, startTime, endTime), customers[i]);
             }
-            Console.WriteLine("<Enter> lopettaa!");
+            Console.WriteLine("<Enter> to exit!");
             Console.ReadLine();
         }
 
@@ -41,7 +41,7 @@ namespace BankApp
 
         public static void PrintTransaction(List<Transaction> transactions, Customer customer)
         {
-            Console.WriteLine($"Tilitapahtumat {customer.FirstName} {customer.LastName}:");
+            Console.WriteLine($"Transactions {customer.FirstName} {customer.LastName}:");
             for (int i = 0; i < transactions.Count(); i++)
             {
                 Console.WriteLine("{0}\t{1}{2:0.00}", transactions[i].TimeStamp.ToShortDateString(), transactions[i].Sum >= 0 ? "+" : "",
