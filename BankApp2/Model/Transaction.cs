@@ -7,6 +7,19 @@ namespace BankApp2.Model
 {
     public partial class Transaction
     {
+        public Transaction()
+        {
+        }
+        public Transaction(decimal amount, DateTime timeStamp)
+        {
+            Amount = amount;
+            TimeStamp = timeStamp;
+        }
+        public override string ToString()
+        {
+            return $"{Amount:C}, {TimeStamp}";
+        }
+
         public long Id { get; set; }
         [Required]
         [Column("IBAN", TypeName = "nchar(20)")]

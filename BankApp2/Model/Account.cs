@@ -12,6 +12,19 @@ namespace BankApp2.Model
             Transaction = new HashSet<Transaction>();
         }
 
+        public Account(string iban, string name, long bankId, long customerId, decimal balance)
+        {
+            Iban = iban;
+            Name = name;
+            BankId = bankId;
+            CustomerId = customerId;
+            Balance = balance;
+        }
+        public override string ToString()
+        {
+            return $"{Iban}, {Balance:C}";
+        }
+
         [Key]
         [Column("IBAN", TypeName = "nchar(20)")]
         public string Iban { get; set; }

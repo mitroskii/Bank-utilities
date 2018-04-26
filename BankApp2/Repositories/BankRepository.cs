@@ -10,15 +10,15 @@ namespace BankApp2.Repositories
     class BankRepository
     {
         private readonly BankdbContext _context = new BankdbContext();
-        public void Create(Bank bank)
+        public void CreateBank(Bank bank)
         {
             _context.Bank.Add(bank);
             _context.SaveChanges();
         }
         public List<Bank> Get()
         {
-            List<Bank> persons = _context.Bank.ToListAsync().Result;
-            return persons;
+            List<Bank> banks = _context.Bank.ToListAsync().Result;
+            return banks;
         }
 
         public Bank GetBankById(int id)
@@ -26,7 +26,7 @@ namespace BankApp2.Repositories
             var banks = _context.Bank.FirstOrDefault(b => b.Id == id);
             return banks;
         }
-        public void Update(int id, Bank bank)
+        public void UpdateBank(int id, Bank bank)
         {
             var UpdateBank = GetBankById(id);
             if (UpdateBank != null)
@@ -38,31 +38,27 @@ namespace BankApp2.Repositories
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void DeleteBank(int id)
         {
-            var delBank = _context.Bank.FirstOrDefault(b => b.Id == id);
-            if (delBank != null)
+            var deleteBank = _context.Bank.FirstOrDefault(b => b.Id == id);
+            if (deleteBank != null)
             {
-                _context.Bank.Remove(delBank);
+                _context.Bank.Remove(deleteBank);
                 _context.SaveChanges();
             }
         }
-    }
 
     public List<Bank> GetTransactionsFromBankCustomerAccounts()
         {
             using (var context = new BankdbContext())
             {
-                try
-                {
                     List<Bank> banks = context.Bank
                         .Include(b => b.Customer)
                         .Include(b => b.Account)
                         .Include(b => b.Account).ThenInclude(a => a.Transaction)
                         .ToListAsync().Result;
                     return banks;
-                }
-                catch { Exception ex}
+                
             }
         }
     }

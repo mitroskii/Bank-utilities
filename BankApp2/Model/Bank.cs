@@ -13,6 +13,22 @@ namespace BankApp2.Model
             Customer = new HashSet<Customer>();
         }
 
+        public Bank(long id)
+        {
+            Id = id;
+        }
+
+        public Bank(string name, string bic)
+        {
+            Name = name;
+            Bic = bic;
+        }
+        public override string ToString()
+        {
+            return $"{Name}, {Bic}";
+        }
+
+
         public long Id { get; set; }
         [Required]
         [StringLength(50)]

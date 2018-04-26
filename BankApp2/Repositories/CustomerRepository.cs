@@ -10,16 +10,16 @@ namespace BankApp2.Repositories
     class CustomerRepository
     {
         private readonly BankdbContext _context = new BankdbContext();
-        public void Create(Bank customer)
+        public void CreateCustomer(Customer customer)
         {
-            _context.Bank.Add(customer);
+            _context.Customer.Add(customer);
             _context.SaveChanges();
         }
 
         public List<Customer> Get()
         {
-            List<Customer> persons = _context.Customer.ToListAsync().Result;
-            return persons;
+            List<Customer> customers = _context.Customer.ToListAsync().Result;
+            return customers;
         }
         public Customer GetCustomerById(int id)
         {
@@ -27,7 +27,7 @@ namespace BankApp2.Repositories
             return customers;
         }
 
-        public void Update(int id, Customer customer)
+        public void UpdateCustomer(int id, Customer customer)
         {
             var UpdateCustomer = GetCustomerById(id);
             if (UpdateCustomer != null)
@@ -39,7 +39,7 @@ namespace BankApp2.Repositories
             }
             _context.SaveChanges();
         }
-        public void Delete(int id)
+        public void DeleteCustomer(int id)
         {
             var delCustomer = _context.Customer.FirstOrDefault(c => c.Id == id);
             if (delCustomer != null)
