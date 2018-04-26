@@ -13,15 +13,11 @@ namespace BankApp2.Model
             Customer = new HashSet<Customer>();
         }
 
-        public Bank(long id)
-        {
-            Id = id;
-        }
-
-        public Bank(string name, string bic)
+        public Bank(string name, string bic, long id)
         {
             Name = name;
             Bic = bic;
+            Id = id;
         }
         public override string ToString()
         {

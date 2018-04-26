@@ -5,6 +5,7 @@ using BankApp2.Repositories;
 using System.Linq;
 using System.Collections.Generic;
 
+
 namespace BankApp2
 {
     class Program
@@ -21,8 +22,8 @@ namespace BankApp2
             static void CreateBank()
             {
                 BankRepository bankRepository = new BankRepository();
-                Bank b = new Bank("Lappeenrannan pankki", "LPIFF");
-                Bank b2 = new Bank("Kuopion pankki", "KPIFF");
+                Bank b = new Bank("Lappeenrannan pankki", "LPIFF",6);
+                Bank b2 = new Bank("Kuopion pankki", "KPIFF",7);
             }
             static void UpdateBank()
             {
